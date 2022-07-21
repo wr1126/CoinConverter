@@ -48,9 +48,47 @@ function MinutesToHours() {
   );
 }
 function KmToMiles() {
+  const [number, setNumber] = useState(0);
+  const [mtoK, setMtoK] = useState(false);
+
+  function onChange(e) {
+    setNumber(e.target.value);
+  }
+  function reset() {
+    setNumber(0);
+  }
+  function convert() {
+    setNumber(0);
+    setMtoK(!mtoK);
+  }
+
   return (
     <>
       <h3>Km to Miles</h3>
+      <div>
+        <label>Km </label>
+        <input
+          id="km"
+          value={mtoK ? number / 0.62137119 : number}
+          onChange={onChange}
+          type="number"
+          placeholder="km"
+          disabled={mtoK ? true : false}
+        />
+      </div>
+      <div>
+        <label>Miles </label>
+        <input
+          id="miles"
+          value={mtoK ? number : number * 0.62137119}
+          onChange={onChange}
+          type="number"
+          placeholder="miles"
+          disabled={mtoK ? false : true}
+        />
+      </div>
+      <button onClick={reset}>Reset</button>
+      <button onClick={convert}>{mtoK ? "Km to Miles" : "Miles to Km"}</button>
     </>
   );
 }
